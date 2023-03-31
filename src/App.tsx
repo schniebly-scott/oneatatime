@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+//imports from my components
+import Calendar from './Components/Calendar'
+import Sidebar from './Components/Sidebar';
+import Todo from './Components/Todo';
+import TopBar from './Components/TopBar';
+
+//imports from material UI
+import Stack from '@mui/material/Stack';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack spacing={0} style={{ flex: "auto" }}>
+      <TopBar />
+      <div style={{ 
+        flex: "auto",
+        flexFlow: 'column'
+       }}>
+        <Calendar />
+        <div style={{
+          flex: "4 1 auto"
+        }}>
+          <Todo />
+          <Sidebar />
+        </div>
+      </div>
+    </Stack>
   );
 }
 

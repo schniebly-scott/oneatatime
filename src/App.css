@@ -1,38 +1,154 @@
-.App {
-  text-align: center;
+@import 'https://fonts.googleapis.com/css?family=Nunito+Sans';
+
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+:root {
+  --owhite: #E3E8E3;
+	--obrown: #66635A;
+	--light-blue: #7E999F;
+	--mid-blue: #4E535B;
+	--dark-blue: #2E333E;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  position: relative;
+  color: var(--owhite);
+  height: 100vh;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Nunito Sans';
+  font-weight: 200;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+div {
+  display: flex;
+  
+}
+
+button {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  appearance: none;
+  font-size: 1.3rem;
+  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
+    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+  transition: all ease-in 0.1s;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  height: fit-content;
+  width: fit-content;
+  margin: 10px;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+/* -----------------------------------------------------------------------------------------------------------
+                 Main Stuff
+---------------------------------------------------------------------------------------------------*/
+#root {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Topbar
+---------------------------------------------------------------------------------------------------*/
+.TopBar {
+  background-color: var(--dark-blue);
+  width: 100%;
+  height: 30px;
+  float: left;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding-right: 2px;
+  box-sizing: border-box;
+}
+
+.draggable {
+  flex: auto;
+  user-select: none;
+}
+
+.draggable p {
+  margin: 4px 0px 4px 9px;
+  opacity: 70%;
+}
+
+.Controls {
+  gap: 3px;
+}
+
+.Controls button {
+  justify-content: center;
+  background-color: var(--dark-blue);
+  color: var(--obrown);
+  /* border-left: 1mm solid #66635A; */
+  border-radius: 0;
+}
+
+.Controls button:hover {
+  background-color: #404655;
+}
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Calendar
+---------------------------------------------------------------------------------------------------*/
+
+.Calendar {
+  background-color: var(--obrown);
+  display: flex;
+  flex: 6 1 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Todo
+---------------------------------------------------------------------------------------------------*/
+.Todo {
+  background-color: var(--light-blue);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex: 6 1 auto;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* -----------------------------------------------------------------------------------------------------------
+                 Sidebar
+---------------------------------------------------------------------------------------------------*/
+.Sidebar {
+  background-color: var(--mid-blue);
+  display: flex;
+  flex-direction: column;
+  flex: 4 1 auto;
 }
