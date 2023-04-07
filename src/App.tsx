@@ -14,17 +14,10 @@ function App() {
   return (
     <Stack spacing={0} style={{ flex: "auto" }}>
       <TopBar />
-      <div style={{ 
-        flex: "auto",
-        flexFlow: 'column'
-       }}>
+      <div className='grid-container'>
         <Calendar />
-        <div style={{
-          flex: "4 1 auto"
-        }}>
-          <Todo />
-          <Sidebar />
-        </div>
+        <Todo />
+        <Sidebar />
       </div>
     </Stack>
   );

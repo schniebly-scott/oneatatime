@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import useScript from "./Utils/Gapi";
+
+import error from '../Assets/Error-Messages/error1.png';
+import { CssBaseline } from "@mui/material";
 
 const Calendar: React.FC<any> = () => {
   const [isConnected, setConnected] = useState<number>(0);
@@ -11,13 +15,16 @@ const Calendar: React.FC<any> = () => {
     switch (c) {
       case 0:
         //waiting for selection
-        return <DoubleButton setState={setConnected} />
+        return <GoogleButton setState={setConnected} />
       case 1:
         //selected no calendar
         return <WaitingRoom />;
       case 2:
         //signed in and ready
         return <Events />;
+      case 3:
+        //no internet or script didin't load
+        return <NoInternet />;
       default:
         console.log("ERROR: Invalid number passed to isConnected");
     }
@@ -46,20 +53,27 @@ class WaitingRoom extends React.Component<any, any> {
   }
 }
 
+const NoInternet = () => {
+  return (
+      <img src={error} width={400} height={400}></img>
+  );
+}
+
 interface MethodProps {
   setState: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const DoubleButton = ({ setState }: MethodProps) => {
-  function handleSignIn(): void {
-  }
+const { client_secret, client_id, redirect_uris } = require('./client_id.json').web;
+
+const GoogleButton = ({ setState }: MethodProps) => {
 
   function handleCredentialResponse(response: { credential: string; }) {
     console.log("Encoded JWT ID token: " + response.credential);
   }
-  useEffect(() => {
+
+  function onload() {
     google.accounts.id.initialize({
-      client_id: "212061092710-00a3iamutj4kodq42fpo6e5is2mbfpq3.apps.googleusercontent.com",
+      client_id: client_id,
       callback: handleCredentialResponse
     });
     google.accounts.id.renderButton(
@@ -67,11 +81,15 @@ const DoubleButton = ({ setState }: MethodProps) => {
       { theme: "outline", size: "large" }  // customization attributes
     );
     google.accounts.id.prompt(); // also display the One Tap dialog
-  });
+  };
+
+  const onfail = () => {
+    setState(3);
+  }
 
   return (
     <div>
-      
+      {useScript("https://accounts.google.com/gsi/client", onload, onfail)}
       <div id="buttonDiv"></div>
     </div>
   );
